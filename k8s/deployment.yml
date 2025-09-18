@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: ecomm
-        image: mahbeer/ecomm   # replace with your Docker Hub image
+        image: mahbeer/ecomm:latest   # replace with your Docker Hub image
         ports:
         - containerPort: 80
 
