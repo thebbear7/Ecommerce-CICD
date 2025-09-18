@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-id') // DockerHub credentials stored in Jenkins
-        IMAGE_NAME = 'your-dockerhub-username/frontend-app'
-        KUBE_NAMESPACE = 'frontend'
+        IMAGE_NAME = 'mahbeer/ecomm'
+        KUBE_NAMESPACE = 'ecomm'
     }
 
     stages {
@@ -22,10 +22,10 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                sh 'echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'docker push $IMAGE_NAME:$GIT_COMMIT'
-            }
-        }
+    }
+}
 
         stage('Deploy to EKS') {
             steps {
