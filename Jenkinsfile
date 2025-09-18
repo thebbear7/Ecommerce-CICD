@@ -29,11 +29,18 @@ pipeline {
 
         stage('Deploy to EKS') {
             steps {
-                // Assumes kubectl is configured to point to your existing EKS cluster
-                sh 'kubectl apply -f k8s/namespace.yml'
-                sh 'kubectl apply -f k8s/deployment.yml'
-                
-            }
-        }
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-creds-id'
+                ]]) {
+                    sh '''
+                        aws eks update-kubeconfig --region ap-south-1 --name ecomm-cluster
+                        kubectl apply -f k8s/namespace.yml
+                        kubectl apply -f k8s/deployment.yml
+             '''
+                }
+    }
+}
+
     }
 }
