@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:$GIT_COMMIT .'
+                sh 'docker build -t $IMAGE_NAME:$GIT_COMMIT . -t $IMAGE_NAME:latest .'
             }
         }
 
