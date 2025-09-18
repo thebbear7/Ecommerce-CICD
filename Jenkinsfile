@@ -30,9 +30,9 @@ pipeline {
         stage('Deploy to EKS') {
             steps {
                 // Assumes kubectl is configured to point to your existing EKS cluster
-                sh 'kubectl apply -f k8s/namespace.yaml'
-                sh 'kubectl apply -f k8s/deployment.yaml'
-                sh 'kubectl apply -f k8s/service.yaml'
+                sh 'kubectl apply -f k8s/namespace.yml'
+                sh 'kubectl apply -f k8s/deployment.yml'
+                
             }
         }
     }
